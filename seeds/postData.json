@@ -2,7 +2,6 @@
     {
         "title": "Sample Title",
         "content": "Sample Content",
-        "author_user": "Sample User",
-        "timestamp": "Sample Time"
+        "user_id": 1
     }
 ]

@@ -19,11 +19,11 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        user_username:{
+        user_id:{
             type: DataTypes.STRING,
             references: {
                 model:'user',
-                key: 'username'
+                key: 'id'
             }
         }
     },
@@ -34,3 +34,5 @@ Post.init(
         modelName: 'post',
     }
 )
+
+module.exports = Post;
