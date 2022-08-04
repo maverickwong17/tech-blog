@@ -10,7 +10,6 @@ router.get("/", async(req, res) =>{
         })
         const posts = postData.map((post) =>  post.get({ plain: true })
     );
-        // res.status(200).json(postData)
         res.render('homepage', {posts,loggedIn: req.session.loggedIn})
     } catch (err) {
         console.log(err);
@@ -18,8 +17,20 @@ router.get("/", async(req, res) =>{
     }
 })
 
-router.get('/post/:id', withAuth, async(req, res)=>{
-    
+router.get('/posts/:id', async(req, res)=>{
+    try {
+        const postData = await Post.findByPk(req.params.id,{
+            include: [{model:Comment},{model:User,
+            attributes: { exclude: ["password"] }},]
+        })
+        // res.status(200).json(postData)
+        const post = postData.get({ plain: true })
+        console.log(post);
+        res.render('post', {post, loggedIn:req.session.loggedIn})
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 })
 
 router.get('/login', (req, res) => {
