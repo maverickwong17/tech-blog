@@ -23,9 +23,7 @@ router.get('/posts/:id', async(req, res)=>{
             include: [{model:Comment},{model:User,
             attributes: { exclude: ["password"] }},]
         })
-        // res.status(200).json(postData)
         const post = postData.get({ plain: true })
-        console.log(post);
         res.render('post', {post, loggedIn:req.session.loggedIn})
     } catch (err) {
         console.log(err);
