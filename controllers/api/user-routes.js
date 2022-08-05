@@ -17,10 +17,11 @@ router.post('/', async (req, res) => {
         username: req.body.username,
         password: req.body.password,
       });
-  
+      // const userinfo =  dbUserData.get({ plain: true });
+      // console.log(userinfo)
       req.session.save(() => {
         req.session.loggedIn = true;
-        req.session.user = dbUserData.username;
+        // req.session.user_id =;
         res.status(200).json(dbUserData);
       });
     } catch (err) {
@@ -56,7 +57,7 @@ router.post('/login', async (req, res) => {
   
       req.session.save(() => {
         req.session.loggedIn = true;
-        req.session.id = dbUserData.username;
+        req.session.user_id = dbUserData.id;
         res
           .status(200)
           .json({ user: dbUserData, message: 'You are now logged in!' });
